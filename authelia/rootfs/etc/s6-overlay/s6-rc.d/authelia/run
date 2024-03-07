@@ -6,4 +6,4 @@
 
 bashio::log.info "Starting Authelia...."
 
-exec authelia --config /share/authelia/config/configuration.yml
+exec authelia --config /config/configuration.yml

@@ -13,7 +13,9 @@ arch:
 startup: application
 ports:
   9091/tcp: 9091
-ports_description:
-  9091/tcp: Web interface
 map:
-  - share:rw
+  - addon_config:rw
+options:
+  domain: "exemple.com"
+schema:
+  domain: str

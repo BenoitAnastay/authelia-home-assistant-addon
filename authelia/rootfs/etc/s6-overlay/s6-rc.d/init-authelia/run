@@ -1,0 +1,24 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Benoit Anastay Add-on: Authelia
+# Runs the Authelia daemon
+# ==============================================================================
+
+bashio::log.info "Initialize Authelia...."
+
+if ! bashio::fs.file_exists '/config/configuration.yml'; then
+    bashio::log.blue "Configuration file missing, start scaffolding"
+    jwt_secret=$(authelia crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric | sed 's/Random Password: //g')
+    session_secret=$(authelia crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric | sed 's/Random Password: //g')
+    storage_secret=$(authelia crypto hash generate argon2 --random --random.length 64 --random.charset alphanumeric | sed 's/Random Password: //g')
+
+    # Use template to generate configuration.yml
+    bashio::var.json \
+        jwt_secret $jwt_secret \
+        session_secret $session_secret \
+        storage_secret $storage_secret \
+        domain "$(bashio::config 'domain')" \
+        | tempio \
+            -template /etc/s6-overlay/s6-rc.d/init-authelia/configuration.gtpl \
+            -out /config/configuration.yml
+fi

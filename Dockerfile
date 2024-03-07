@@ -10,7 +10,7 @@ WORKDIR /app
 ENV PATH="/app:${PATH}" \
     PUID=0 \
     PGID=0 \
-    X_AUTHELIA_CONFIG="/share/authelia/config/configuration.yml" \
+    X_AUTHELIA_CONFIG="/config/configuration.yml" \
     AUTHELIA_SERVER_DISABLE_HEALTHCHECK=true
 
 RUN \

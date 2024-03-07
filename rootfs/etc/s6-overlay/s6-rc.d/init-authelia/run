@@ -1,9 +1,0 @@
-#!/command/with-contenv bashio
-# ==============================================================================
-# Benoit Anastay Add-on: Authelia
-# Runs the Authelia daemon
-# ==============================================================================
-
-bashio::log.info "Starting Authelia...."
-
-exec authelia --config /share/authelia/config/configuration.yml
