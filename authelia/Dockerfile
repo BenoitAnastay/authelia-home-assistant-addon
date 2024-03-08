@@ -1,4 +1,4 @@
-FROM ghcr.io/hassio-addons/base:15.0.3
+FROM ghcr.io/hassio-addons/base:15.0.7
 ARG AUTHELIA_VERSION=v4.37.5
 
 # Set shell
@@ -14,7 +14,7 @@ ENV PATH="/app:${PATH}" \
     AUTHELIA_SERVER_DISABLE_HEALTHCHECK=true
 
 RUN \
-	apk --no-cache add ca-certificates su-exec tzdata
+	apk --no-cache add ca-certificates=20230506-r0 su-exec=0.2-r3 tzdata=2024a-r0
 
 ARG BUILD_ARCH
 RUN case ${BUILD_ARCH} in \
@@ -22,7 +22,7 @@ RUN case ${BUILD_ARCH} in \
          "aarch64")  AUTHELIA_ARCH=arm64  ;; \
     esac \
  && echo "Download build for : ${AUTHELIA_ARCH}" \
- && wget https://github.com/authelia/authelia/releases/download/${AUTHELIA_VERSION}/authelia-${AUTHELIA_VERSION}-linux-${AUTHELIA_ARCH}-musl.tar.gz \
+ && wget -q https://github.com/authelia/authelia/releases/download/${AUTHELIA_VERSION}/authelia-${AUTHELIA_VERSION}-linux-${AUTHELIA_ARCH}-musl.tar.gz \
  && tar -xzf authelia-${AUTHELIA_VERSION}-linux-${AUTHELIA_ARCH}-musl.tar.gz \
  && mv authelia-linux-${AUTHELIA_ARCH}-musl authelia \
  && chmod +x authelia
