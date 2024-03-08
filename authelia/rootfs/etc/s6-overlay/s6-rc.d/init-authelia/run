@@ -18,7 +18,18 @@ if ! bashio::fs.file_exists '/config/configuration.yml'; then
         session_secret $session_secret \
         storage_secret $storage_secret \
         domain "$(bashio::config 'domain')" \
+        smtp_username: "$(bashio::config 'smtp_username')" \
+        smtp_password: "$(bashio::config 'smtp_password')" \
+        smtp_sender: "$(bashio::config 'smtp_sender')" \
+        smtp_host: "$(bashio::config 'smtp_host')" \
+        smtp_port: "$(bashio::config 'smtp_port')" \
         | tempio \
             -template /etc/s6-overlay/s6-rc.d/init-authelia/configuration.gtpl \
             -out /config/configuration.yml
+        
+    bashio::var.json \
+        domain "$(bashio::config 'domain')" \
+        | tempio \
+            -template /etc/s6-overlay/s6-rc.d/init-authelia/users.gtpl \
+            -out /config/users.yml
 fi
