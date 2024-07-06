@@ -18,6 +18,7 @@ options:
   domain: "exemple.com"
 schema:
   domain: str
+  config_filters: str?
   smtp_username: str?
   smtp_password: str?
   smtp_sender: str?
