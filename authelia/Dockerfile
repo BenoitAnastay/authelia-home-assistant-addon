@@ -1,5 +1,5 @@
 FROM ghcr.io/hassio-addons/base:16.1.2
-ARG AUTHELIA_VERSION=v4.38.8
+ARG AUTHELIA_VERSION="v4.38.9"
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
