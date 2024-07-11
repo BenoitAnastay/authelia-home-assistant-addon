@@ -1,4 +1,4 @@
-FROM ghcr.io/hassio-addons/base:15.0.7
+FROM ghcr.io/hassio-addons/base:16.1.2
 ARG AUTHELIA_VERSION=v4.38.8
 
 # Set shell
@@ -14,7 +14,7 @@ ENV PATH="/app:${PATH}" \
     AUTHELIA_SERVER_DISABLE_HEALTHCHECK=true
 
 RUN \
-	apk --no-cache add ca-certificates=20230506-r0 su-exec=0.2-r3 tzdata=2024a-r0
+	apk --no-cache add ca-certificates=20240705-r0 su-exec=0.2-r3 tzdata=2024a-r1
 
 ARG BUILD_ARCH
 RUN case ${BUILD_ARCH} in \
