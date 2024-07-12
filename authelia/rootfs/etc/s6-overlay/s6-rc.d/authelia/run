@@ -9,6 +9,8 @@ bashio::log.info "Starting Authelia...."
 # Support for https://www.authelia.com/configuration/methods/files/#file-filters.
 # For compatibility/stability reasons use the variable instead of the command-line argument:
 # "...the name of the CLI argument will change (we suggest using the environment variable which will not)"
-export X_AUTHELIA_CONFIG_FILTERS="$(bashio::config 'config_filters' '')"
+if bashio::config.has_value 'config_filters'; then
+  export X_AUTHELIA_CONFIG_FILTERS="$(bashio::config 'config_filters' '')"
+fi
 
 exec authelia --config /config/configuration.yml
