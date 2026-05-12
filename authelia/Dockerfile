@@ -16,15 +16,14 @@ ENV PATH="/app:${PATH}" \
 RUN \
 	apk --no-cache add ca-certificates=20260413-r0 su-exec=0.3-r0
 
-ARG BUILD_ARCH
-RUN case ${BUILD_ARCH} in \
-         "amd64")  AUTHELIA_ARCH=amd64  ;; \
-         "aarch64")  AUTHELIA_ARCH=arm64  ;; \
-    esac \
- && echo "Download build for : ${AUTHELIA_ARCH}" \
- && wget -q https://github.com/authelia/authelia/releases/download/${AUTHELIA_VERSION}/authelia-${AUTHELIA_VERSION}-linux-${AUTHELIA_ARCH}-musl.tar.gz \
- && tar -xzf authelia-${AUTHELIA_VERSION}-linux-${AUTHELIA_ARCH}-musl.tar.gz \
- && mv authelia-linux-${AUTHELIA_ARCH}-musl authelia \
+
+ARG TARGETOS
+ARG TARGETARCH
+
+RUN echo "Download build for : ${TARGETARCH}" \
+ && echo "https://github.com/authelia/authelia/releases/download/${AUTHELIA_VERSION}/authelia-${AUTHELIA_VERSION}-${TARGETOS}-${TARGETARCH}-musl.tar.gz" \
+ && wget -q https://github.com/authelia/authelia/releases/download/${AUTHELIA_VERSION}/authelia-${AUTHELIA_VERSION}-${TARGETOS}-${TARGETARCH}-musl.tar.gz \
+ && tar -zxvf authelia-${AUTHELIA_VERSION}-${TARGETOS}-${TARGETARCH}-musl.tar.gz authelia \
  && chmod +x authelia
 
 EXPOSE 9091
