@@ -14,7 +14,7 @@ ENV PATH="/app:${PATH}" \
     AUTHELIA_SERVER_DISABLE_HEALTHCHECK=true
 
 RUN \
-	apk --no-cache add ca-certificates=20240705-r0 su-exec=0.2-r3 tzdata=2024a-r1
+	apk --no-cache add ca-certificates=20260413-r0 su-exec=0.3-r0
 
 ARG BUILD_ARCH
 RUN case ${BUILD_ARCH} in \
