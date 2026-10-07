@@ -1,4 +1,4 @@
-FROM ghcr.io/hassio-addons/base:20.1.1
+FROM ghcr.io/hassio-addons/base:21.0.8
 ARG AUTHELIA_VERSION="v4.39.19"
 
 # Set shell
